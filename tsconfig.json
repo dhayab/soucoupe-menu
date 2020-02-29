@@ -1,24 +1,14 @@
 {
 	"compilerOptions": {
-		"lib": ["es2016", "dom"],
-		"moduleResolution": "node",
 		"target": "es6",
-		"sourceMap": true,
-		"stripInternal": true,
-		"newLine": "LF",
+		"moduleResolution": "node",
+		"lib": ["es2016", "dom"],
+		"strictNullChecks": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"strictNullChecks": true,
 		"noImplicitAny": true,
 		"noImplicitReturns": true,
 		"noImplicitThis": true,
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true
-	},
-	"include": [
-		"**/*.ts"
-	],
-	"exclude": [
-		"node_modules"
-	]
+		"esModuleInterop": true
+	}
 }

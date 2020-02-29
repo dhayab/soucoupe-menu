@@ -2,34 +2,21 @@
   "name": "soucoupe-menu",
   "version": "0.1.1",
   "description": "Serverless method for retrieving the daily menu of a Parisian café",
-  "main": "soucoupe.js",
   "scripts": {
-    "start": "serverless offline",
-    "deploy": "serverless deploy"
+    "start": "now dev"
   },
-  "author": "Dhaya Benmessaoud <dhaya.benmessaoud+github@gmail.com>",
+  "author": "Dhaya <https://github.com/dhayab>",
   "repository": {
     "type": "git",
     "url": "https://github.com/dhayab/soucoupe-menu.git"
   },
   "license": "MIT",
   "dependencies": {
-    "bufferutil": "^4.0.1",
-    "puppeteer": "^1.11.0",
-    "tar": "^4.4.8",
-    "utf-8-validate": "^5.0.2"
+    "chrome-aws-lambda": "^2.1.1",
+    "puppeteer-core": "^2.1.1"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.17",
-    "@types/node": "^10.12.18",
-    "@types/puppeteer": "^1.11.1",
-    "@types/tar": "^4.0.0",
-    "serverless": "^1.35.1",
-    "serverless-offline": "^3.31.3",
-    "serverless-webpack": "^5.2.0",
-    "source-map-support": "^0.5.9",
-    "ts-loader": "^5.3.3",
-    "typescript": "^3.2.2",
-    "webpack": "^4.28.3"
+    "@now/node": "^1.4.1",
+    "now": "^17.0.4"
   }
 }

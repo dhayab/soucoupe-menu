@@ -1,7 +1,7 @@
 # Directories
-.serverless
-.webpack
 node_modules
+.now
 
 # Files
 .DS_Store
+.env
