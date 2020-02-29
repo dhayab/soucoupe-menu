@@ -8,7 +8,7 @@ export const scrape = async (url: string, numArticles: number = 5) => {
 	const browser = await chromium.puppeteer.launch({
 		args: chromium.args,
 		executablePath: await getExecutablePath(),
-		headless: chromium.headless,
+		headless: true,
 	})
 
 	const page = await browser.newPage();
