@@ -21,9 +21,10 @@ const Home: NextPage<MenuApi> = ({ message, created_time }) => {
 		<main>
 			<Head>
 				<title>Café Soucoupe • Menu du jour</title>
+				<link rel="icon" type="image/png" href="/icon.png" />
 			</Head>
 			<header>
-				<img src="/logo.jpg" alt="Café Soucoupe" title="Café Soucoupe" />
+				<img src="/logo.svg" alt="Café Soucoupe" title="Café Soucoupe" />
 			</header>
 			<p className="menu">{message}</p>
 			<footer>

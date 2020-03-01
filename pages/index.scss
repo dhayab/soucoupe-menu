@@ -1,13 +1,24 @@
 :root {
-	--body-background: #fafafa;
-	--card-foreground: #333;
-	--card-background: #fff;
 	--card-font-size: 1.4rem;
 	--card-size: 50vw;
 	--logo-size: 8rem;
+	--body-background: #fafafa;
+	--card-foreground: #333;
+	--card-background: #fff;
 	--logo-border-color: #f0f0f0;
 	--footer-foreground: #999;
 	--footer-foreground-hover: #666;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--body-background: #111;
+		--card-foreground: #f0f0f0;
+		--card-background: #222;
+		--logo-border-color: #f0f0f0;
+		--footer-foreground: #aaa;
+		--footer-foreground-hover: #ccc;
+	}
 }
 
 * {
