@@ -16,6 +16,7 @@ const Home: NextPage<MenuApi> = ({ message, created_time }) => {
 	const date = new Date(created_time);
 	const formattedDate = date.toLocaleString('fr', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' });
 	const relativeDate = formatDistanceToNow(date, { addSuffix: true, locale: fr });
+
 	return (
 		<main>
 			<Head>
@@ -26,7 +27,11 @@ const Home: NextPage<MenuApi> = ({ message, created_time }) => {
 			</header>
 			<p className="menu">{message}</p>
 			<footer>
-				<time dateTime={date.toISOString()} title={formattedDate}>{relativeDate}</time>
+				<label className="date">
+					<input type="checkbox" className="toggle"></input>
+					<time dateTime={date.toISOString()} title={formattedDate}>{relativeDate}</time>
+					<span>{formattedDate}</span>
+				</label>
 			</footer>
 		</main>
 	)

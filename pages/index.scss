@@ -7,6 +7,7 @@
 	--logo-size: 8rem;
 	--logo-border-color: #f0f0f0;
 	--footer-foreground: #999;
+	--footer-foreground-hover: #666;
 }
 
 * {
@@ -68,9 +69,39 @@ main {
 	}
 
 	footer {
-		time {
+		.date {
+			position: relative;
+			display: block;
 			color: var(--footer-foreground);
-			cursor: default;
+			height: 2rem;
+			user-select: none;
+			cursor: pointer;
+
+			.toggle { display: none; }
+
+			time, span {
+				position: absolute;
+				top: 0;
+				left: 0;
+				line-height: 2rem;
+				opacity: 0;
+				transition: 0.2s ease-out all;
+				pointer-events: none;
+
+				&:hover {
+					color: var(--footer-foreground-hover);
+				}
+			}
+
+			time { transform: translateY(-50%); }
+			span { transform: translateY(50%); }
+
+			.toggle:not(:checked) ~ time,
+			.toggle:checked ~ span {
+				opacity: 1;
+				transform: translateY(0);
+				pointer-events: unset;
+			}
 		}
 	}
 }
