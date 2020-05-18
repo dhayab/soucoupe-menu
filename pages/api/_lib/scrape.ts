@@ -23,9 +23,14 @@ export const scrape = async (url: string, numArticles: number = 5) => {
 					more && more.click();
 
 					const time = article.dataset.ft!.match(/publish_time.+?(\d+)/)![1];
+					const imageUrl = article.querySelector<HTMLElement>('.story_body_container > div:not(:first-of-type)')
+						?.innerHTML.match(/url\(['"](.+?)['"]/)
+					;
+
 					return {
 						created_time: new Date(parseInt(time) * 1000).toISOString(),
 						message: article.querySelector<HTMLElement>('.story_body_container > div')?.innerText,
+						image: imageUrl && decodeURIComponent(imageUrl[1].replace(/(\\\w+ )/g, (code) => code.replace('\\', '%').trim())),
 						link: article.querySelector<HTMLAnchorElement>('[data-sigil="m-feed-voice-subtitle"] a')?.href,
 					};
 				});
