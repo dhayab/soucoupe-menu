@@ -1,5 +1,3 @@
-import './index.scss';
-
 import { formatDistanceToNow } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import fetch from 'isomorphic-unfetch';
