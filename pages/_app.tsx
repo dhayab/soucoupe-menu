@@ -2,4 +2,5 @@ import './_app.scss';
 
 import { AppProps } from 'next/app';
 
-export default ({ Component, pageProps }: AppProps) => <Component {...pageProps} />;
+const App = ({ Component, pageProps }: AppProps) => <Component {...pageProps} />;
+export default App;
