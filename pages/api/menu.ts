@@ -1,6 +1,6 @@
 import { NowRequest, NowResponse } from '@now/node';
 
-import { scrape } from './_lib/scrape';
+import { scrape } from '../../utils/scrape';
 
 export default async (_req: NowRequest, res: NowResponse) => {
 	const { PAGE_URL, PAGE_ARTICLES } = process.env;

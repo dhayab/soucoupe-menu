@@ -1,18 +1,21 @@
 import { formatDistanceToNow } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import fetch from 'isomorphic-unfetch';
-import { NextPage } from 'next';
+import { GetServerSideProps } from 'next';
 import absoluteUrl from 'next-absolute-url';
 import Head from 'next/head';
 import * as React from 'react';
 
-type MenuApi = {
-	message: string,
-	created_time: Date,
-	link: string,
-};
+import { MenuApi } from '../types/menu';
 
-const Home: NextPage<MenuApi> = ({ message, created_time, link }) => {
+export const getServerSideProps: GetServerSideProps<MenuApi> = async ({ req }) => {
+	const { origin } = absoluteUrl(req);
+	const res = await fetch(`${origin}/api/menu`);
+	const [menu]: MenuApi[] = await res.json();
+	return { props: menu };
+}
+
+export default function Home({ message, created_time, link }: MenuApi) {
 	const date = new Date(created_time);
 	const formattedDate = date.toLocaleString('fr', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' });
 	const relativeDate = formatDistanceToNow(date, { addSuffix: true, locale: fr });
@@ -37,12 +40,3 @@ const Home: NextPage<MenuApi> = ({ message, created_time, link }) => {
 		</main>
 	)
 };
-
-Home.getInitialProps = async ({ req }) => {
-	const { origin } = absoluteUrl(req);
-	const res = await fetch(`${origin}/api/menu`);
-	const [menu]: MenuApi[] = await res.json();
-	return menu;
-}
-
-export default Home;

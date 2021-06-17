@@ -1,5 +1,7 @@
 import chromium from 'chrome-aws-lambda';
 
+import { MenuApi } from '../types/menu';
+
 const getExecutablePath = async () => {
 	return process.env.CUSTOM_CHROMIUM || (await chromium.executablePath);
 };
@@ -9,14 +11,14 @@ export const scrape = async (url: string, numArticles: number = 5) => {
 		args: chromium.args,
 		executablePath: await getExecutablePath(),
 		headless: true,
-	})
+	});
 
 	const page = await browser.newPage();
 	await page.goto(url, { waitUntil: 'networkidle2' });
 
 	const loadArticles = (numArticles: number) => {
 		const loader: () => Promise<Array<{ created_time: string, message: string }>> = async () => {
-			const articles: Array<{ created_time: string, message: string }> = await page.evaluate(() => {
+			const articles: Array<MenuApi> = await page.evaluate(() => {
 				window.scrollBy(0, window.innerHeight);
 				return Array.from(document.querySelectorAll('article')).map((article) => {
 					const more = article.querySelector<HTMLElement>('[data-sigil="more"]');
@@ -29,9 +31,9 @@ export const scrape = async (url: string, numArticles: number = 5) => {
 
 					return {
 						created_time: new Date(parseInt(time) * 1000).toISOString(),
-						message: article.querySelector<HTMLElement>('.story_body_container > div')?.innerText,
-						image: imageUrl && decodeURIComponent(imageUrl[1].replace(/(\\\w+ )/g, (code) => code.replace('\\', '%').trim())),
-						link: article.querySelector<HTMLAnchorElement>('[data-sigil="m-feed-voice-subtitle"] a')?.href,
+						message: article.querySelector<HTMLElement>('.story_body_container > div')?.innerText!,
+						image: imageUrl && decodeURIComponent(imageUrl[1].replace(/(\\\w+ )/g, (code) => code.replace('\\', '%').trim())) || undefined,
+						link: article.querySelector<HTMLAnchorElement>('[data-sigil="m-feed-voice-subtitle"] a')?.href!,
 					};
 				});
 			});
